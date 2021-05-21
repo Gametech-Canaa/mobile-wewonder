@@ -1,17 +1,24 @@
-import React from "react";
-import { View, Text, SafeAreaView, Button } from "react-native";
+import React, { useState } from "react";
+import { SafeAreaView, Text, Button, TextInput } from "react-native";
 
-// import { Container } from './styles';
+import { Container } from "./styles";
 
 const SignIn: React.FC = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   return (
-    <SafeAreaView>
+    <Container>
       <Text>SignIn</Text>
-      <Button title="Teste" onPress={() => {}}>
-        {" "}
-        Registrar
+      <TextInput onChangeText={setEmail} value={email} placeholder="Email" />
+      <TextInput
+        onChangeText={setPassword}
+        value={password}
+        placeholder="Senha"
+      />
+      <Button title="" onPress={() => {}}>
+        ENTRAR
       </Button>
-    </SafeAreaView>
+    </Container>
   );
 };
 

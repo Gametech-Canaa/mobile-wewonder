@@ -1,44 +1,33 @@
-import * as React from "react";
-import { Button, View, SafeAreaView } from "react-native";
-import SignIn from "./src/pages/SignIn";
-import SignUp from "./src/pages/SignUp";
-import MyGroups from "./src/pages/MyGroups";
-import Profile from "./src/pages/Profile";
-import CreateGroups from "./src/pages/CreateGroups";
-import Achivements from "./src/pages/Achivements";
-import MainApp from "./src/pages/MainApp";
+import { StatusBar } from "expo-status-bar";
 
-import { createDrawerNavigator } from "@react-navigation/drawer";
-import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import React from "react";
 
-const App: React.FC = () => {
-  const Drawer = createDrawerNavigator();
+import { View } from "react-native";
 
-  const Stack = createBottomTabNavigator();
-  const [isSigned, setIsSigned] = React.useState(false);
+import {
+  Archivo_400Regular,
+  Archivo_700Bold,
+  useFonts,
+} from "@expo-google-fonts/archivo";
+import {
+  Poppins_400Regular,
+  Poppins_600SemiBold,
+} from "@expo-google-fonts/poppins";
+
+import AppStack from "./src/routes/AppStack";
+
+export default function App() {
+  let [fontsLoaded] = useFonts({
+    Archivo_400Regular,
+    Archivo_700Bold,
+    Poppins_400Regular,
+    Poppins_600SemiBold,
+  });
 
   return (
-    <SafeAreaView>
-      {isSigned ? (
-        <NavigationContainer>
-          <Drawer.Navigator initialRouteName="Home">
-            <Drawer.Screen name="Home" component={MainApp} />
-            <Drawer.Screen name="Meus Grupos" component={MyGroups} />
-            <Drawer.Screen name="Criar Grupos" component={CreateGroups} />
-            <Drawer.Screen name="Meu Perfil" component={Profile} />
-            <Drawer.Screen name="Conquistas" component={Achivements} />
-          </Drawer.Navigator>
-        </NavigationContainer>
-      ) : (
-        <NavigationContainer>
-          <Stack.Navigator initialRouteName="Login" headerMode="none">
-            <Stack.Screen name="Login" component={SignIn} />
-            <Stack.Screen name="Register" component={SignUp} />
-          </Stack.Navigator>
-        </NavigationContainer>
-      )}
-    </SafeAreaView>
+    <>
+      <AppStack />
+      <StatusBar style="light" />
+    </>
   );
-};
-export default App;
+}
